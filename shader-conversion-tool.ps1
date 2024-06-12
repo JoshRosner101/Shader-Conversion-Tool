@@ -23,13 +23,7 @@ else {
     $text = $text -replace ("iTime","u_time")
     $text = $text -replace ("iMouse","u_mouse")
     
-    $text = "precision mediump float;
-
-uniform vec2 u_resolution;
-uniform vec2 u_mouse;
-uniform float u_time;
-
-$($text)" 
+    $text = "precision mediump float;`n`nuniform vec2 u_resolution;`nuniform vec2 u_mouse;`nuniform float u_time;`n`n$($text)" 
 }
 
 Write-Output $text | Out-File $outputFilePath
