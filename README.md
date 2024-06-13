@@ -2,6 +2,18 @@
  
 This is a simple powershell script to convert GLSL shaders from how they're written in ShaderToy to regular GLSL shaders. This process can also be done in reverse.
 
+The script can be ran by running this command in the downloaded folder:
+```powershell
+./shader-conversion-tool.ps1
+```
+
+|flag|function|
+|--|--|
+| source | defines source file. default value: "test.txt" |
+| output | defines output file. default value: "test.glsl" |
+| r | reverses conversion. ShaderToy -> GLSL becomes GLSL -> ShaderToy |
+
+# Examples
 ## ShaderToy to GLSL
 Open Windows Powershell in this directory and run the command
 ```powershell
