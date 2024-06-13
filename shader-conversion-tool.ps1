@@ -1,8 +1,10 @@
-$filePath = $args[0]
-$outputFilePath = $args[1]
-$flag = $args[2]
-$text = Get-Content -Path $filePath -Raw
-if($flag -eq "-r") {
+param(
+    [string]$source = "test.txt",
+    [string]$output = "test.glsl",
+    [switch]$r
+)
+$text = Get-Content -Path $source -Raw
+if($r) {
     $text = $text.Replace("void main()", "void mainImage( out vec4 fragColor, in vec2 fragCoord )")
     $text = $text -replace ("precision mediump float;", "")
     $text = $text -replace ("uniform vec2 u_resolution;", "")
@@ -26,4 +28,4 @@ else {
     $text = "precision mediump float;`n`nuniform vec2 u_resolution;`nuniform vec2 u_mouse;`nuniform float u_time;`n`n$($text)" 
 }
 
-Write-Output $text | Out-File $outputFilePath
+Write-Output $text | Out-File $output
