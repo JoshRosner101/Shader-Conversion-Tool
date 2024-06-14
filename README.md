@@ -7,11 +7,11 @@ The script can be ran by running this command in the downloaded folder:
 ./shader-conversion-tool.ps1
 ```
 
-|flag|function|
-|--|--|
-| source | defines source file. default value: "test.txt" |
-| output | defines output file. default value: "test.glsl" |
-| r | reverses conversion. ShaderToy -> GLSL becomes GLSL -> ShaderToy |
+|flag|function|default|
+|--|--|--|
+| source | defines source file|test.txt|
+| output | defines output file |test.glsl|
+| r | reverses conversion ||
 
 # Examples
 ## ShaderToy to GLSL
