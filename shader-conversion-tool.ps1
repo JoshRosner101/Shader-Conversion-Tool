@@ -1,10 +1,10 @@
 param(
     [string]$source = "test.txt",
     [string]$output = "test.glsl",
-    [switch]$r
+    [switch]$StG
 )
 $text = Get-Content -Path $source -Raw
-if($r) {
+if($StG) {
     $text = $text.Replace("void main()", "void mainImage( out vec4 fragColor, in vec2 fragCoord )")
     $text = $text -replace ("precision mediump float;", "")
     $text = $text -replace ("uniform vec2 u_resolution;", "")

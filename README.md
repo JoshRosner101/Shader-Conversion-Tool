@@ -11,7 +11,7 @@ The script can be ran by running this command in the downloaded folder:
 |--|--|--|
 | source | defines source file|test.txt|
 | output | defines output file |test.glsl|
-| r | reverses conversion ||
+| StG | Shadertoy to GLSL ||
 
 # Examples
 ## ShaderToy to GLSL
@@ -24,6 +24,6 @@ This will convert the ShaderToy code in "test.txt" into GLSL code that will be o
 ## GLSL to ShaderToy
 To convert from GLSL to ShaderToy, open Windows Powershell in this directory and run the command
 ```powershell
-./shader-conversion-tool.ps1 -source test.glsl -output test.txt -r
+./shader-conversion-tool.ps1 -source test.glsl -output test.txt -StG
 ```
 This will convert the GLSL code in "test.glsl" into ShaderToy code that will be outputted to "test.txt".s
