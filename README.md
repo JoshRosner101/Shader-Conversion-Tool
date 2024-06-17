@@ -1,6 +1,6 @@
 # Shader Conversion Tool
  
-This is a simple powershell script to convert GLSL shaders from how they're written in ShaderToy to regular GLSL shaders. This process can also be done in reverse.
+This is a simple powershell script to convert GLSL shaders from how they're written in ShaderToy to regular GLSL shaders. This process can also be done in reverse. I've been working on implementing shaders in Balatro modding, so I have also implemented some conversion tools between that format and the others.
 
 The script can be ran by running this command in the downloaded folder:
 ```powershell
@@ -11,7 +11,9 @@ The script can be ran by running this command in the downloaded folder:
 |--|--|--|
 | source | defines source file|test.txt|
 | output | defines output file |test.glsl|
+| edition | Balatro edition name ||
 | StG | Shadertoy to GLSL ||
+| BtS | Balatro to ShaderToy ||
 
 # Examples
 ## ShaderToy to GLSL

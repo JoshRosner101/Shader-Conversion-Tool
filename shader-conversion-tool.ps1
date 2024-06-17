@@ -7,6 +7,10 @@ param(
 )
 $text = Get-Content -Path $source -Raw
 if($BtS) {
+    if(-not $edition) {
+        Write-Host "Must include edition to translate!"
+        exit
+    }
     $text = $text.Replace("return dissolve_mask(tex, texture_coords, uv);", "")
     $text = $text.Replace("return dissolve_mask(tex*colour, texture_coords, uv);", "")
     $text = $text -replace ("time", "iTime")
