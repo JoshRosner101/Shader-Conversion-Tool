@@ -1,10 +1,27 @@
 param(
     [string]$source = "test.txt",
     [string]$output = "test.glsl",
-    [switch]$StG
+    [switch]$StG,
+    [switch]$BtS,
+    [string]$edition
 )
 $text = Get-Content -Path $source -Raw
-if($StG) {
+if($BtS) {
+    $text = $text.Replace("return dissolve_mask(tex, texture_coords, uv);", "")
+    $text = $text.Replace("return dissolve_mask(tex*colour, texture_coords, uv);", "")
+    $text = $text -replace ("time", "iTime")
+    $text = $text.Replace("vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords )", "void mainImage( out vec4 fragColor, in vec2 fragCoord )")
+    $text = $text.Replace("vec4 tex = Texel( texture, texture_coords);", "")
+    $text = $text.Replace("vec4 tex = Texel(texture, texture_coords);", "")
+    $text = $text.Replace("vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;", "vec2 $($edition) = vec2(sin(iTime)*0.4+iTime/10.0,iTime);`n`tvec2 uv = fragCoord/iResolution.xy;`n`tfragColor = vec4(1.0);")
+    $text = $text -replace ("texture_details.ab", "iResolution.xy")
+    $text = $text -replace ("texture_details.ba", "iResolution.yx")
+    $text = $text -replace ("texture_details.a", "iResolution.x")
+    $text = $text -replace ("texture_details.b", "iResolution.y")
+    $text = $text -replace ("tex", "fragColor")
+    $text = $text -replace ("number", "float")
+}
+elseif($StG) {
     $text = $text.Replace("void main()", "void mainImage( out vec4 fragColor, in vec2 fragCoord )")
     $text = $text -replace ("precision mediump float;", "")
     $text = $text -replace ("uniform vec2 u_resolution;", "")
