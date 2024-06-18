@@ -2,11 +2,32 @@ param(
     [string]$source = "test.txt",
     [string]$output = "test.glsl",
     [switch]$StG,
+    [switch]$BtG,
     [switch]$BtS,
     [string]$edition
 )
 $text = Get-Content -Path $source -Raw
-if($BtS) {
+if($BtG) {
+    if(-not $edition) {
+        Write-Host "Must include edition to translate!"
+        exit
+    }
+    $text = $text.Replace("return dissolve_mask(tex, texture_coords, uv);", "")
+    $text = $text.Replace("return dissolve_mask(tex*colour, texture_coords, uv);", "")
+    $text = $text -replace ("time", "u_time")
+    $text = $text.Replace("vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords )", "void main()")
+    $text = $text.Replace("vec4 tex = Texel( texture, texture_coords);", "")
+    $text = $text.Replace("vec4 tex = Texel(texture, texture_coords);", "")
+    $text = $text.Replace("vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;", "//This is an emulated version of $($edition). The y is time, and the x is a sin wave over time that slowly increases.`n`tvec2 $($edition) = vec2(sin(u_time)*0.4+u_time/10.0,u_time);`n`tvec2 uv = gl_FragCoord.xy/u_resolution.xy;`n`tgl_FragColor = vec4(1.0);")
+    $text = $text -replace ("texture_details.ab", "u_resolution.xy")
+    $text = $text -replace ("texture_details.ba", "u_resolution.yx")
+    $text = $text -replace ("texture_details.a", "u_resolution.x")
+    $text = $text -replace ("texture_details.b", "u_resolution.y")
+    $text = $text -replace ("tex", "gl_FragColor")
+    $text = $text -replace ("number", "float")
+    $text = "precision mediump float;`n`nuniform vec2 u_resolution;`nuniform vec2 u_mouse;`nuniform float u_time;`n`n$($text)"
+}
+elseif($BtS) {
     if(-not $edition) {
         Write-Host "Must include edition to translate!"
         exit
