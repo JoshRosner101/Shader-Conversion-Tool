@@ -17,7 +17,7 @@ if($BtS) {
     $text = $text.Replace("vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords )", "void mainImage( out vec4 fragColor, in vec2 fragCoord )")
     $text = $text.Replace("vec4 tex = Texel( texture, texture_coords);", "")
     $text = $text.Replace("vec4 tex = Texel(texture, texture_coords);", "")
-    $text = $text.Replace("vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;", "vec2 $($edition) = vec2(sin(iTime)*0.4+iTime/10.0,iTime);`n`tvec2 uv = fragCoord/iResolution.xy;`n`tfragColor = vec4(1.0);")
+    $text = $text.Replace("vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;", "//This is an emulated version of $($edition). The y is time, and the x is a sin wave over time that slowly increases.`n`tvec2 $($edition) = vec2(sin(iTime)*0.4+iTime/10.0,iTime);`n`tvec2 uv = fragCoord/iResolution.xy;`n`tfragColor = vec4(1.0);")
     $text = $text -replace ("texture_details.ab", "iResolution.xy")
     $text = $text -replace ("texture_details.ba", "iResolution.yx")
     $text = $text -replace ("texture_details.a", "iResolution.x")
