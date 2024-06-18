@@ -13,6 +13,7 @@ The script can be ran by running this command in the downloaded folder:
 | output | defines output file |test.glsl|
 | edition | Balatro edition name ||
 | StG | Shadertoy to GLSL ||
+| BtG | Balatro to GLSL ||
 | BtS | Balatro to ShaderToy ||
 
 # Examples
