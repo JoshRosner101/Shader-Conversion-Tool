@@ -12,6 +12,7 @@ The script can be ran by running this command in the downloaded folder:
 | source | defines source file|test.txt|
 | output | defines output file |test.glsl|
 | edition | Balatro edition name ||
+| GtS | GLSL to Shadertoy ||
 | StG | Shadertoy to GLSL ||
 | BtG | Balatro to GLSL ||
 | BtS | Balatro to ShaderToy ||
@@ -20,7 +21,7 @@ The script can be ran by running this command in the downloaded folder:
 ## ShaderToy to GLSL
 Open Windows Powershell in this directory and run the command
 ```powershell
-./shader-conversion-tool.ps1 -source test.txt -output test.glsl
+./shader-conversion-tool.ps1 -source test.txt -output test.glsl -GtS
 ```
 This will convert the ShaderToy code in "test.txt" into GLSL code that will be outputted to "test.glsl".
 
