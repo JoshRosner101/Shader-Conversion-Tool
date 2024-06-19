@@ -1,6 +1,7 @@
 param(
     [string]$source = "test.txt",
     [string]$output = "test.glsl",
+    [switch]$GtS,
     [switch]$StG,
     [switch]$BtG,
     [switch]$BtS,
@@ -58,7 +59,7 @@ elseif($StG) {
     $text = $text -replace ("u_time","iTime")
     $text = $text -replace ("u_mouse","iMouse")
 }
-else {
+elseif($GtS) {
     $text = $text.Replace("void mainImage( out vec4 fragColor, in vec2 fragCoord )", "void main()")
     $text = $text -replace ("fragCoord","gl_FragCoord")
     $text = $text -replace ("gl_FragCoord(?=[^.])","gl_FragCoord.xy")
@@ -68,6 +69,10 @@ else {
     $text = $text -replace ("iMouse","u_mouse")
     
     $text = "precision mediump float;`n`nuniform vec2 u_resolution;`nuniform vec2 u_mouse;`nuniform float u_time;`n`n$($text)" 
+}
+else {
+    Write-Output "Please use a tag to specify conversion type!"
+    exit
 }
 
 Write-Output $text | Out-File $output
