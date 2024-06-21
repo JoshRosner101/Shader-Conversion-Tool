@@ -1,14 +1,47 @@
 param(
     [string]$source = "test.txt",
     [string]$output = "test.glsl",
+    [switch]$GtB,
     [switch]$GtS,
+    [switch]$StB,
     [switch]$StG,
     [switch]$BtG,
     [switch]$BtS,
     [string]$edition
 )
 $text = Get-Content -Path $source -Raw
-if($BtG) {
+if($GtB) {
+    Write-Host "Not Currently Implemented"
+    exit
+}
+elseif($GtS) {
+    $text = $text.Replace("void mainImage( out vec4 fragColor, in vec2 fragCoord )", "void main()")
+    $text = $text -replace ("fragCoord","gl_FragCoord")
+    $text = $text -replace ("gl_FragCoord(?=[^.])","gl_FragCoord.xy")
+    $text = $text -replace ("fragColor","gl_FragColor")
+    $text = $text -replace ("iResolution","u_resolution")
+    $text = $text -replace ("iTime","u_time")
+    $text = $text -replace ("iMouse","u_mouse")
+    
+    $text = "precision mediump float;`n`nuniform vec2 u_resolution;`nuniform vec2 u_mouse;`nuniform float u_time;`n`n$($text)" 
+}
+elseif($StB) {
+    Write-Host "Not Currently Implemented"
+    exit
+}
+elseif($StG) {
+    $text = $text.Replace("void main()", "void mainImage( out vec4 fragColor, in vec2 fragCoord )")
+    $text = $text -replace ("precision mediump float;", "")
+    $text = $text -replace ("uniform vec2 u_resolution;", "")
+    $text = $text -replace ("uniform vec2 u_mouse;", "")
+    $text = $text -replace ("uniform float u_time;", "")
+    $text = $text -replace ("gl_FragCoord","fragCoord")
+    $text = $text -replace ("gl_FragColor","fragColor")
+    $text = $text -replace ("u_resolution","iResolution")
+    $text = $text -replace ("u_time","iTime")
+    $text = $text -replace ("u_mouse","iMouse")
+}
+elseif($BtG) {
     if(-not $edition) {
         Write-Host "Must include edition to translate!"
         exit
@@ -46,29 +79,6 @@ elseif($BtS) {
     $text = $text -replace ("texture_details.b", "iResolution.y")
     $text = $text -replace ("tex", "fragColor")
     $text = $text -replace ("number", "float")
-}
-elseif($StG) {
-    $text = $text.Replace("void main()", "void mainImage( out vec4 fragColor, in vec2 fragCoord )")
-    $text = $text -replace ("precision mediump float;", "")
-    $text = $text -replace ("uniform vec2 u_resolution;", "")
-    $text = $text -replace ("uniform vec2 u_mouse;", "")
-    $text = $text -replace ("uniform float u_time;", "")
-    $text = $text -replace ("gl_FragCoord","fragCoord")
-    $text = $text -replace ("gl_FragColor","fragColor")
-    $text = $text -replace ("u_resolution","iResolution")
-    $text = $text -replace ("u_time","iTime")
-    $text = $text -replace ("u_mouse","iMouse")
-}
-elseif($GtS) {
-    $text = $text.Replace("void mainImage( out vec4 fragColor, in vec2 fragCoord )", "void main()")
-    $text = $text -replace ("fragCoord","gl_FragCoord")
-    $text = $text -replace ("gl_FragCoord(?=[^.])","gl_FragCoord.xy")
-    $text = $text -replace ("fragColor","gl_FragColor")
-    $text = $text -replace ("iResolution","u_resolution")
-    $text = $text -replace ("iTime","u_time")
-    $text = $text -replace ("iMouse","u_mouse")
-    
-    $text = "precision mediump float;`n`nuniform vec2 u_resolution;`nuniform vec2 u_mouse;`nuniform float u_time;`n`n$($text)" 
 }
 else {
     Write-Output "Please use a tag to specify conversion type!"
