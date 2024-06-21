@@ -19,6 +19,13 @@ Along with the corresponding flags for your conversion:
 | BtS | Balatro to ShaderToy ||
 
 # Examples
+## GLSL to ShaderToy
+To convert from GLSL to ShaderToy, open Windows Powershell in this directory and run the command
+```powershell
+./shader-conversion-tool.ps1 -source test.glsl -output test.txt -StG
+```
+This will convert the GLSL code in "test.glsl" into ShaderToy code that will be outputted to "test.txt".
+
 ## ShaderToy to GLSL
 Open Windows Powershell in this directory and run the command
 ```powershell
@@ -26,12 +33,12 @@ Open Windows Powershell in this directory and run the command
 ```
 This will convert the ShaderToy code in "test.txt" into GLSL code that will be outputted to "test.glsl".
 
-## GLSL to ShaderToy
-To convert from GLSL to ShaderToy, open Windows Powershell in this directory and run the command
+## Balatro to GLSL
+To convert from Balatro to GLSL, open Windows Powershell in this directory and run the command
 ```powershell
-./shader-conversion-tool.ps1 -source test.glsl -output test.txt -StG
+./shader-conversion-tool.ps1 -source test.txt -output test.glsl -BtG -edition [insert edition name]
 ```
-This will convert the GLSL code in "test.glsl" into ShaderToy code that will be outputted to "test.txt".
+This will convert the Balatro code in "test.txt" into GLSL code that will be outputted to "test.glsl". For the Balatro code, please use the main function of your shader and any functions used within it. Edition should be the name used for the edition variable, such as foil.
 
 ## Balatro to Shadertoy
 To convert from Balatro to ShaderToy, open Windows Powershell in this directory and run the command
