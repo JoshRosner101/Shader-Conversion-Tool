@@ -8,15 +8,15 @@ The script can be ran by running this command in the downloaded folder:
 ```
 Along with the corresponding flags for your conversion:
 
-|flag|function|default|
-|--|--|--|
-| source | defines source file|test.txt|
-| output | defines output file |test.glsl|
-| edition | Balatro edition name ||
-| GtS | GLSL to Shadertoy ||
-| StG | Shadertoy to GLSL ||
-| BtG | Balatro to GLSL ||
-| BtS | Balatro to ShaderToy ||
+|flag|function|
+|--|--|
+| source | defines source file|
+| output | defines output file |
+| edition | Balatro edition name |
+| GtS | GLSL to Shadertoy |
+| StG | Shadertoy to GLSL |
+| BtG | Balatro to GLSL |
+| BtS | Balatro to ShaderToy |
 
 # Examples
 ## GLSL to ShaderToy

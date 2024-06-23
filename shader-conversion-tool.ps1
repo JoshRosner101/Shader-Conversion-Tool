@@ -1,6 +1,6 @@
 param(
-    [string]$source = "test.txt",
-    [string]$output = "test.glsl",
+    [string]$source,
+    [string]$output,
     [switch]$GtB,
     [switch]$GtS,
     [switch]$StB,
