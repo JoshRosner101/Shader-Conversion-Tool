@@ -11,6 +11,10 @@ param(
 )
 $text = Get-Content -Path $source -Raw
 if($GtB) {
+    if(-not $edition) {
+        Write-Host "Must include edition to translate!"
+        exit
+    }
     Write-Host "Not Currently Implemented"
     exit
 }
@@ -26,6 +30,10 @@ elseif($GtS) {
     $text = "precision mediump float;`n`nuniform vec2 u_resolution;`nuniform vec2 u_mouse;`nuniform float u_time;`n`n$($text)" 
 }
 elseif($StB) {
+    if(-not $edition) {
+        Write-Host "Must include edition to translate!"
+        exit
+    }
     Write-Host "Not Currently Implemented"
     exit
 }
