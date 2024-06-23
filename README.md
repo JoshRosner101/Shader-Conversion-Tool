@@ -6,13 +6,13 @@ The script can be ran by running this command in the downloaded folder:
 ```powershell
 ./shader-conversion-tool.ps1
 ```
-Along with the corresponding flags for your conversion:
+Along with the corresponding flags for your conversion. Please note that -edition is required for any conversion that involves Balatro.
 
 |flag|function|
 |--|--|
 | source | defines source file|
 | output | defines output file |
-| edition | Balatro edition name |
+| edition | defines Balatro edition name |
 | GtS | GLSL to Shadertoy |
 | StG | Shadertoy to GLSL |
 | BtG | Balatro to GLSL |
