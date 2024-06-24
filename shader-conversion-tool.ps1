@@ -15,8 +15,21 @@ if($GtB) {
         Write-Host "Must include edition to translate!"
         exit
     }
-    Write-Host "Not Currently Implemented"
-    exit
+    $text = $text.Replace("void main()", "vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords )")
+    $text = $text.Replace("vec2 uv = gl_FragCoord.xy/u_resolution.xy;", "vec4 tex = Texel(texture, texture_coords);`n`tvec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;")
+    $text = $text -replace ("precision mediump float;", "")
+    $text = $text -replace ("uniform vec2 u_resolution;", "")
+    $text = $text -replace ("uniform vec2 u_mouse;", "")
+    $text = $text -replace ("uniform float u_time;", "")
+    $text = $text.Replace("//This should be removed when translating back to Balatro", "")
+    $text = $text.Replace("//This is an emulated version of crystallized. The y is time, and the x is a sin wave over time that slowly increases.", "")
+    $text = $text.Replace("vec2 $($edition) = vec2(sin(u_time)*0.4+u_time/10.0,u_time);", "")
+    $text = $text.Replace("gl_FragColor = vec4(1.0);", "")
+    $text = $text -replace ("gl_FragCoord","")
+    $text = $text -replace ("u_resolution","")
+    $text = $text -replace ("u_time","time")
+    $text = $text -replace ("gl_FragColor","tex")
+    $text = $text -replace ("\}(?=[^}]*$)","`treturn dissolve_mask(tex*colour, texture_coords, uv);`n}")
 }
 elseif($StG) {
     $text = $text.Replace("void mainImage( out vec4 fragColor, in vec2 fragCoord )", "void main()")
