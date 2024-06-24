@@ -18,7 +18,7 @@ if($GtB) {
     Write-Host "Not Currently Implemented"
     exit
 }
-elseif($GtS) {
+elseif($StG) {
     $text = $text.Replace("void mainImage( out vec4 fragColor, in vec2 fragCoord )", "void main()")
     $text = $text -replace ("fragCoord","gl_FragCoord")
     $text = $text -replace ("gl_FragCoord(?=[^.])","gl_FragCoord.xy")
@@ -37,7 +37,7 @@ elseif($StB) {
     Write-Host "Not Currently Implemented"
     exit
 }
-elseif($StG) {
+elseif($GtS) {
     $text = $text.Replace("void main()", "void mainImage( out vec4 fragColor, in vec2 fragCoord )")
     $text = $text -replace ("precision mediump float;", "")
     $text = $text -replace ("uniform vec2 u_resolution;", "")
